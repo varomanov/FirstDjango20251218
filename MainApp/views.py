@@ -53,9 +53,8 @@ def items(request):
 
 
 def item(request, id: int):
-    text = f'<p>Товар с id={id} не найден</p>'
+    text = {'name': 'Товар не найден', 'quantity': 0}
     for i in ITEMS:
         if id == i['id']:
-            text = f'<p>{i['name']}, {i['quantity']}</p><a href="/items">Назад к списку товаров</a>'
-            return HttpResponse(text)
-    return HttpResponse(text)
+            text = {'name': i['name'], 'quantity': i['quantity']}
+    return render(request, 'item.html', text)
