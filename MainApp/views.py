@@ -20,11 +20,15 @@ ITEMS = [
 
 
 def home(request):
-    text = f"""
-    <h1>"Изучаем django"</h1>
-    <strong>Автор</strong>: <i>{USER['last_name']}.{USER['first_name'][0]}.{USER['middle_name'][0]}</i>
-    """
-    return HttpResponse(text)
+    context = {
+        "first_name": "Vladimir",
+        "middle_name": "Andreevich",
+        "last_name": "Romanov",
+        "phone": "888-000-99988",
+        "email": "888@yandex.ru",
+        "page_name": 'Главная страница'
+    }
+    return render(request, 'index.html', context=context)
 
 
 def about(request):
@@ -42,7 +46,8 @@ def about(request):
 def items(request):
     text = ['<ol>', '</ol>']
     for i in ITEMS:
-        text.insert(-1, f'<li><a href="item/{i['id']}">{i['name']}, {i['quantity']}</a></li>')
+        text.insert(-1,
+                    f'<li><a href="item/{i['id']}">{i['name']}, {i['quantity']}</a></li>')
     text = ''.join(text)
     return HttpResponse(text)
 
