@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Item
+from django.db.models import Sum
 import pprint
 
 USER = {
@@ -24,6 +26,7 @@ menu = [
     {'name': 'Товары', 'path': '/items'},
 ]
 
+
 def home(request):
     context = {
         "first_name": "Vladimir",
@@ -43,13 +46,16 @@ def about(request):
 
 
 def items(request):
-    context = {'items': ITEMS, 'menu': menu}
+    products = Item.objects.all()
+    context = {'items': products, 'menu': menu,
+               'total_count': products.aggregate(total=Sum('count'))['total']}
     return render(request, 'items.html', context)
 
 
 def item(request, id: int):
     context = {'name': 'Товар не найден', 'quantity': 0, 'menu': menu}
-    for i in ITEMS:
-        if id == i['id']:
-            context = {'name': i['name'], 'quantity': i['quantity'], 'menu': menu}
+    products = Item.objects.filter(id=id)[0]
+    print(products.id, type(products))
+    if products:
+        return render(request, 'item.html', {'name': products.name, 'quantity': products.count, 'menu': menu})
     return render(request, 'item.html', context)
