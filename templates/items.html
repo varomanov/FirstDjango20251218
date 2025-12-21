@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ name }}</title>
+    <title>Все товары</title>
   </head>
   <body>
     <ul>
@@ -13,16 +13,13 @@
         </li>
       {% endfor %}
     </ul>    
-    <h1>{{ name }}</h1>
-    <p>
-      Количество товара:{% if quantity == 0 %}
-        Товар отсутсвует
-      {% else %}
-        {{ quantity }}
-      {% endif %}
-    </p>
-    <p>
-      <a href="/items">Назад к списку товаров</a>
-    </p>
+    <h1>Все товары</h1>
+    <ol>
+      {% for item in items %}
+        <li>
+          <a href="/item/{{ item.id }}">{{ item.name }}</a>
+        </li>
+      {% endfor %}
+    </ol>
   </body>
 </html>

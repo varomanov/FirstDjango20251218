@@ -18,6 +18,11 @@ ITEMS = [
     {"id": 8, "name": "Кепка", "quantity": 124},
 ]
 
+menu = [
+    {'name': 'Home', 'path': '/'},
+    {'name': 'About', 'path': '/about'},
+    {'name': 'Items', 'path': '/items'},
+]
 
 def home(request):
     context = {
@@ -26,35 +31,25 @@ def home(request):
         "last_name": "Romanov",
         "phone": "888-000-99988",
         "email": "888@yandex.ru",
-        "page_name": 'Главная страница'
+        "page_name": 'Главная страница',
+        "menu": menu
     }
     return render(request, 'index.html', context=context)
 
 
 def about(request):
-    # pprint.pprint(dir(request))
-    text = f"""
-        <p>Имя: {USER['first_name']}</p>
-        <p>Отчество: {USER['middle_name']}</p>
-        <p>Фамилия: {USER['last_name']}</p>
-        <p>телефон: {USER['phone']}</p>
-        <p>email: {USER['email']}</p>
-    """
-    return HttpResponse(text)
+    context = {'USER': USER, 'menu': menu}
+    return render(request, 'about.html', context)
 
 
 def items(request):
-    text = ['<ol>', '</ol>']
-    for i in ITEMS:
-        text.insert(-1,
-                    f'<li><a href="item/{i['id']}">{i['name']}, {i['quantity']}</a></li>')
-    text = ''.join(text)
-    return HttpResponse(text)
+    context = {'items': ITEMS, 'menu': menu}
+    return render(request, 'items.html', context)
 
 
 def item(request, id: int):
-    text = {'name': 'Товар не найден', 'quantity': 0}
+    context = {'name': 'Товар не найден', 'quantity': 0, 'menu': menu}
     for i in ITEMS:
         if id == i['id']:
-            text = {'name': i['name'], 'quantity': i['quantity']}
-    return render(request, 'item.html', text)
+            context = {'name': i['name'], 'quantity': i['quantity'], 'menu': menu}
+    return render(request, 'item.html', context)
