@@ -19,9 +19,9 @@ ITEMS = [
 ]
 
 menu = [
-    {'name': 'Home', 'path': '/'},
-    {'name': 'About', 'path': '/about'},
-    {'name': 'Items', 'path': '/items'},
+    {'name': 'Главная', 'path': '/'},
+    {'name': 'Обо мне', 'path': '/about'},
+    {'name': 'Товары', 'path': '/items'},
 ]
 
 def home(request):
