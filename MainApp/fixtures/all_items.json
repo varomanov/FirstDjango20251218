@@ -1,0 +1,47 @@
+[
+{
+  "model": "MainApp.item",
+  "pk": 1,
+  "fields": {
+    "name": "Телефон",
+    "brand": "Samsung",
+    "count": 11
+  }
+},
+{
+  "model": "MainApp.item",
+  "pk": 2,
+  "fields": {
+    "name": "Чайник",
+    "brand": "Beko",
+    "count": 24
+  }
+},
+{
+  "model": "MainApp.item",
+  "pk": 3,
+  "fields": {
+    "name": "Пальто",
+    "brand": "NoName",
+    "count": 4
+  }
+},
+{
+  "model": "MainApp.item",
+  "pk": 4,
+  "fields": {
+    "name": "Кепка",
+    "brand": "СФЗ",
+    "count": 21
+  }
+},
+{
+  "model": "MainApp.item",
+  "pk": 5,
+  "fields": {
+    "name": "Игра",
+    "brand": "Cool",
+    "count": 51
+  }
+}
+]
